@@ -1,0 +1,29 @@
+name: CI #nom du workflow
+on:
+  push: #déclenchement à chaque push
+    branches:
+      - master # sur la branche master uniquement
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: unbuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        whith:
+          node-version-file: ".nvmrc"
+      - run: npm ci
+      - run: npm run lint
+
+  test:
+    runs-on: unbuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        whith:
+          node-version-file: ".nvmrc"
+      - run: npm ci
+      - run: npm test
