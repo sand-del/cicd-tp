@@ -39,7 +39,7 @@ describe('E2E GET /hello', () => {
   it('returns 404 for invalid paths', async () => {
     try {
       await axios.get(`${baseURL}/invalid`);
-      fail('Should have thrown an error');
+      throw new Error('Should have thrown an error');
     } catch (error) {
       expect(error.response.status).toBe(404);
     }
@@ -77,7 +77,7 @@ describe('E2E Error Handling', () => {
     const longName = 'A'.repeat(101);
     try {
       await axios.get(`${baseURL}/hello/${longName}`);
-      fail('Should have thrown an error');
+      throw new Error('Should have thrown an error');
     } catch (error) {
       expect(error.response.status).toBe(400);
       expect(error.response.data).toBe('Name is too long');
@@ -87,7 +87,7 @@ describe('E2E Error Handling', () => {
   it('returns 404 for unsupported HTTP methods', async () => {
     try {
       await axios.put(`${baseURL}/hello`);
-      fail('Should have thrown an error');
+      throw new Error('Should have thrown an error');
     } catch (error) {
       expect(error.response.status).toBe(404);
     }
