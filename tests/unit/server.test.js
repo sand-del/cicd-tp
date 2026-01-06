@@ -14,6 +14,18 @@ describe("GET /hello", () => {
     expect(res.statusCode).toEqual(200);
     expect(res.text).toBe(`Hello world! From ${name}`);
   });
+
+  it("should handle names with special characters in URL", async () => {
+    const name = "Alice%20Bob";
+    const res = await request(app).get(`/hello/${name}`);
+    expect(res.statusCode).toEqual(200);
+    expect(res.text).toBe("Hello world! From Alice Bob");
+  });
+
+  it("should return 404 for invalid paths", async () => {
+    const res = await request(app).get("/invalid");
+    expect(res.statusCode).toEqual(404);
+  });
 });
 
 describe("POST /hello", () => {
@@ -28,5 +40,24 @@ describe("POST /hello", () => {
     const res = await request(app).post("/hello").set("x-name", name);
     expect(res.statusCode).toEqual(200);
     expect(res.text).toBe(`Hello world! From ${name}`);
+  });
+
+  it("should handle names with special characters in header", async () => {
+    const name = "Alice & Bob";
+    const res = await request(app).post("/hello").set("x-name", name);
+    expect(res.statusCode).toEqual(200);
+    expect(res.text).toBe("Hello world! From Alice & Bob");
+  });
+});
+
+describe("Unsupported HTTP methods", () => {
+  it("should return 404 for PUT /hello", async () => {
+    const res = await request(app).put("/hello");
+    expect(res.statusCode).toEqual(404);
+  });
+
+  it("should return 404 for DELETE /hello", async () => {
+    const res = await request(app).delete("/hello");
+    expect(res.statusCode).toEqual(404);
   });
 });

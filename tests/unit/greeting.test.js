@@ -23,4 +23,19 @@ describe("getGreeting", () => {
     const name = "Alice123";
     expect(getGreeting(name)).toBe("Hello world! From Alice123");
   });
+
+  it("returns the hello world message with a very long name", () => {
+    const name = "A".repeat(1000);
+    expect(getGreeting(name)).toBe(`Hello world! From ${name}`);
+  });
+
+  it("returns the hello world message with a name containing spaces", () => {
+    const name = "Alice Bob";
+    expect(getGreeting(name)).toBe("Hello world! From Alice Bob");
+  });
+
+  it("returns the hello world message with a name containing Unicode characters", () => {
+    const name = "Alice 😊";
+    expect(getGreeting(name)).toBe("Hello world! From Alice 😊");
+  });
 });
