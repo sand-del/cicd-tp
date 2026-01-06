@@ -1,81 +1,130 @@
-# TP CI/CD
+# Hello World API
 
-A Node.js application providing a simple greeting service with a REST API. It includes a server built with Express, greeting logic, and comprehensive test
-suites (unit, integration, and end-to-end).
+Une API REST simple pour générer des messages de salutation personnalisés, construite avec Node.js et Express.
 
-## Features
+## 🚀 Démarrage rapide
 
-- **Greeting Functionality**: Generates personalized greetings via `src/greeting.js`.
-- **REST API Server**: Built with Express in `src/server.js`, supporting GET and POST endpoints for greetings.
-- **Testing**: Full test coverage with Jest:
-  - Unit tests in `tests/unit/greeting.test.js`.
-  - Integration tests in `tests/integration/app.test.js`.
-  - End-to-end tests in `tests/e2e/e2e.test.js`.
-- **Linting**: Configured with ESLint (via `.eslintrc.js` and `.eslintignore`).
-- **Node.js Version Management**: Uses `.nvmrc` to specify Node.js v22.19.0.
+### Prérequis
+- Node.js ≥ 14.x
+- npm ≥ 6.x
 
-## Prerequisites
+### Installation
+```bash
+# Cloner le dépôt
+git clone https://github.com/votre-utilisateur/hello-world-api.git
+cd hello-world-api
 
-- Node.js ≥22.19.0 (use `.nvmrc` with nvm: `nvm use`).
-- npm (included with Node.js).
-
-## Installation
-
-1. Fork the repository:
-2. Install dependencies:
-
-```
+# Installer les dépendances
 npm install
-```
 
-## Usage
-
-Start the server:
-
-```
+# Démarrer le serveur en développement
 npm start
+
+# Le serveur sera accessible sur http://localhost:3000
 ```
 
-The server runs on port 3000 (or `process.env.PORT`). Endpoints:
+## 📖 Documentation
 
-- `GET /hello/:name?`: Returns a greeting (e.g., "Hello world!" or "Hello world! From [name]").
-- `POST /hello`: Expects `x-name` header for the name.
+### Endpoints API
 
-## Testing
+| Méthode | Endpoint          | Description                          | Exemple de réponse               |
+|---------|-------------------|--------------------------------------|----------------------------------|
+| GET     | `/hello`          | Message de salutation générique      | `Hello world!`                   |
+| GET     | `/hello/:name`    | Message personnalisé avec paramètre  | `Hello world! From Alice`        |
+| POST    | `/hello`          | Message personnalisé avec en-tête    | `Hello world! From Bob`          |
 
-Run tests with Jest:
+### Exemples d'utilisation
 
-- All tests: `npm test`
-- Unit tests: `npm test -- tests/unit/`
-- Integration tests: `npm test -- tests/integration/`
-- E2E tests: `npm test -- tests/e2e/`
-
-## Linting
-
-Check code quality:
-
-```
-npm run lint
+**GET sans paramètre**
+```bash
+curl http://localhost:3000/hello
+# Réponse: Hello world!
 ```
 
-## Project Structure
+**GET avec paramètre**
+```bash
+curl http://localhost:3000/hello/Alice
+# Réponse: Hello world! From Alice
+```
 
-- `src/greeting.js`: Core greeting logic.
-- `src/server.js`: Express server setup.
-- `tests/`: Test suites (unit, integration, e2e).
-- `.eslintrc.js`: ESLint configuration.
-- `.eslintignore`: Files/directories excluded from linting.
-- `.nvmrc`: Node.js version specification.
-- `package.json`: Project metadata, dependencies, and scripts.
+**POST avec en-tête**
+```bash
+curl -X POST -H "x-name: Bob" http://localhost:3000/hello
+# Réponse: Hello world! From Bob
+```
 
-## Dependencies
+## 🧪 Tests
 
-- **Runtime**: Express (web server), Axios (HTTP client), Supertest (testing utility).
-- **Dev**: ESLint (linting), Jest (testing).
+### Exécuter les tests
+```bash
+# Tous les tests
+npm test
 
-## Contributing
+# Tests unitaires uniquement
+npm test -- tests/unit/
 
-1. Fork the repo.
-2. Create a feature branch.
-3. Run tests and linting.
-4. Submit a pull request.
+# Tests d'intégration uniquement
+npm test -- tests/integration/
+
+# Tests end-to-end uniquement
+npm test -- tests/e2e/
+```
+
+### Couverture des tests
+- ✅ Tests unitaires pour la logique métier
+- ✅ Tests d'intégration pour les endpoints
+- ✅ Tests end-to-end pour le flux complet
+- ✅ Validation des entrées et gestion des erreurs
+
+## 🔧 Configuration
+
+### Variables d'environnement
+| Variable       | Description                     | Valeur par défaut |
+|----------------|---------------------------------|-------------------|
+| PORT           | Port du serveur                 | 3000              |
+| NODE_ENV       | Environnement d'exécution       | development       |
+
+### Exemple de configuration
+```bash
+# Démarrer sur un port différent
+PORT=8080 npm start
+
+# Mode production
+NODE_ENV=production npm start
+```
+
+## 📦 Dépendances
+
+### Principales
+- **express**: Framework web pour Node.js
+- **axios**: Client HTTP pour les tests E2E
+- **supertest**: Bibliothèque de test HTTP
+
+### Développement
+- **jest**: Framework de test
+- **eslint**: Linter pour JavaScript
+
+## 🤝 Contribution
+
+1. Forker le projet
+2. Créer une branche de fonctionnalité
+   ```bash
+   git checkout -b feature/ma-fonctionnalite
+   ```
+3. Commiter vos changements
+   ```bash
+   git commit -m "Ajoute une nouvelle fonctionnalité"
+   ```
+4. Pousser vers la branche
+   ```bash
+   git push origin feature/ma-fonctionnalite
+   ```
+5. Ouvrir une Pull Request
+
+## 📝 Licence
+
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+## 📬 Contact
+
+Pour toute question ou suggestion, veuillez ouvrir une issue sur GitHub.
