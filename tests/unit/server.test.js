@@ -48,6 +48,13 @@ describe("POST /hello", () => {
     expect(res.statusCode).toEqual(200);
     expect(res.text).toBe("Hello world! From Alice & Bob");
   });
+
+  it("should return 400 for names longer than 100 characters in header", async () => {
+    const longName = "A".repeat(101);
+    const res = await request(app).post("/hello").set("x-name", longName);
+    expect(res.statusCode).toEqual(400);
+    expect(res.text).toBe("Name is too long");
+  });
 });
 
 describe("Unsupported HTTP methods", () => {

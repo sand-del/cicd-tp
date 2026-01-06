@@ -38,4 +38,12 @@ describe("getGreeting", () => {
     const name = "Alice 😊";
     expect(getGreeting(name)).toBe("Hello world! From Alice 😊");
   });
+
+  it("returns the hello world message when name is not a string", () => {
+    expect(getGreeting(123)).toBe("Hello world!");
+    expect(getGreeting(null)).toBe("Hello world!");
+    expect(getGreeting(undefined)).toBe("Hello world!");
+    expect(getGreeting({})).toBe("Hello world!");
+    expect(getGreeting([])).toBe("Hello world!");
+  });
 });
