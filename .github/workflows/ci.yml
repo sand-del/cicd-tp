@@ -30,6 +30,7 @@ jobs:
         with:
           node-version-file: ".nvmrc"
       - run: npm ci
+      - run: npm install --save-dev jest-allure 
       - run: npm run test
       
       - name: Generate Allure Report

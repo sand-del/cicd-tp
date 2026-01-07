@@ -1,12 +1,6 @@
 module.exports = {
-  reporters: [
-    'default',
-    [
-      'jest-allure',
-      {
-        resultsDir: 'allure-results',
-        outputDir: 'allure-report'
-      }
-    ]
-  ]
+  testEnvironment: 'allure-jest/node',
+  testEnvironmentOptions: {
+    resultsDir: './allure-results',
+  },
 };
