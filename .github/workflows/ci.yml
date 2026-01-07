@@ -34,4 +34,3 @@ jobs:
       - uses: allure-framework/allure-action@v0
         with:
           report-directory: "./allure-report"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
