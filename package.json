@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "lint": "eslint .",
-    "test": "rimraf allure-results/* && jest --testPathIgnorePatterns=tests/unit/misc.test.js",
+    "test": "npx del-cli allure-results/* && jest --testPathIgnorePatterns=tests/unit/misc.test.js",
     "start": "node src/server.js",
     "alluviewer": "allure serve allure-results",
     "exporter": "node src/allure-prometheus-exporter.js",
-    "test:trigger-alarm": "del-cli allure-results/* && jest tests/unit/misc.test.js"
+    "test:trigger-alarm": "npx del-cli allure-results/* && jest tests/unit/misc.test.js"
   },
   "dependencies": {
     "axios": "^1.3.4",
